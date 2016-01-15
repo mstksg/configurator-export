@@ -13,7 +13,6 @@ module Data.Configurator.Export (
   , hashMapDoc
   ) where
 
--- import Data.Maybe
 import Control.Monad
 import Data.Bifunctor
 import Data.Bool
@@ -21,12 +20,12 @@ import Data.Configurator
 import Data.Configurator.Types
 import Data.Foldable
 import Data.Function
-import Data.Functor
 import Data.HashMap.Strict           (HashMap)
 import Data.List
 import Data.List.NonEmpty            (NonEmpty(..))
 import Data.Monoid
 import Data.Ord
+import Data.Ratio
 import Data.Text                     (Text)
 import Text.PrettyPrint              (Doc, (<+>), ($+$))
 import qualified Data.HashMap.Strict as HM
@@ -104,7 +103,8 @@ hmtToDoc = P.vcat
 valueToDoc :: Value -> Doc
 valueToDoc (Bool b)   = bool "false" "true" b
 valueToDoc (String t) = P.text $ show t
-valueToDoc (Number n) = P.double $ fromRational n
+valueToDoc (Number n) | denominator n == 1 = P.integer $ round n
+                      | otherwise          = P.double  $ fromRational n
 valueToDoc (List vs)  = P.brackets
                       . P.hsep
                       . P.punctuate P.comma
