@@ -45,7 +45,7 @@ renderHashMap :: HashMap Name Value -> String
 renderHashMap = P.render . hashMapDoc
 
 displayConf :: Config -> IO ()
-displayConf c = renderConf c $> ()
+displayConf c = putStrLn =<< renderConf c
 
 writeConf :: FilePath -> Config -> IO ()
 writeConf fp = writeFile fp <=< renderConf
