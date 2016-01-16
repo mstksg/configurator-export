@@ -19,9 +19,11 @@
 --
 -- For a full round trip:
 --
--- > main = do
--- >   cfg <- load [Required "config.cfg"]
--- >   writeConf "config.cfg" cfg
+-- @
+-- main = do
+--   cfg <- load [Required "config.cfg"]
+--   writeConf "config.cfg" cfg
+-- @
 --
 -- This should load the config file, parse it, and then re-export it,
 -- rewriting the original config file.  The result should be an identical
@@ -70,7 +72,6 @@ module Data.Configurator.Export (
   , AlignStyle(..)
   , BraceStyle(..)
   , BoolStyle(..)
-  , NumStyle(..)
   , KeyType(..)
   -- ** Pretty printing
   , renderConf'
@@ -140,27 +141,10 @@ data BraceStyle = SameLineBrace
                   -- ^ Opening braces go on a new line after the key name.
   deriving (Show, Eq, Ord, Read)
 
--- | Style to render numbers as.
-data NumStyle  = NumStyle { numStyleForceDecimals :: Bool
-                            -- ^ Whether or not to force full decimals to
-                            -- be rendered, instead of truncating to
-                            -- scientific notation for numbers less than
-                            -- @0.1@.
-                          , numStyleShowIntegers  :: Bool
-                            -- ^ Whether or not to show "whole numbers" as
-                            -- integer literals, without the trailing @.0@.
-                          }
-  deriving (Show, Eq, Ord, Read)
-
 -- | Style options for pretty-printing the contents of a 'Config'.
 -- Sensible defaults are given as 'confStyle'; it's recommended that you
 -- start with 'confStyle' as a default and use record syntax to modify it
--- to what you want.
---
--- > myStyle = confStyle { confStyleBraceStyle = NewLineBrace
--- >                     , confStyleBoolStyle  = OnOff
--- >                     }
---
+-- to what you want.  See 'confStyle' for more details.
 data ConfStyle
     = ConfStyle { confStyleIndent     :: Int
                   -- ^ Number of columns to indent each tested group.
@@ -171,8 +155,13 @@ data ConfStyle
                   -- ^ Style of opening brace (curly bracket) placement.
                 , confStyleBoolStyle  :: BoolStyle
                   -- ^ Style of displaying 'Bool's as boolean literals.
-                , confStyleNumStyle   :: NumStyle
-                  -- ^ Style for displaying numeric values.
+                , confStyleForceDec   :: Bool
+                  -- ^ Force full decimals to be rendered, instead of
+                  -- truncating to scientific notation for numbers less
+                  -- than @0.1@.
+                , confStyleShowInts   :: Bool
+                  -- ^ Whether or not to show "whole numbers" as integer
+                  -- literals (without the trailing @.0@)
                 , confStyleSortBy     :: (Name, KeyType) -> (Name, KeyType) -> Ordering
                   -- ^ Function to sort keys by, with information on
                   -- whether or not the key contains a group or a single
@@ -189,24 +178,38 @@ data ConfStyle
 
 -- | Sensible defaults for a 'ConfStyle':
 --
--- > confStyle :: ConfStyle
--- > confStyle = ConfStyle { confStyleIndent     = 4
--- >                       , confStyleAlign      = AlignOn 2
--- >                       , confStyleBraceStyle = SameLineBrace
--- >                       , confStyleBoolStyle  = TrueFalse
--- >                       , confStyleNumStyle   = NumStyle False True
--- >                         -- sort by "type" of key, then sort alphabetically
--- >                       , confStyleSortBy     = comparing snd <> comparing fst
--- >                       , confStyleGroupSep   = 0
--- >                       , confStyleValueSep   = 0
--- >                       , confStyleTopSep     = 1
--- >                       }
+-- @
+-- confStyle :: ConfStyle
+-- confStyle = ConfStyle { confStyleIndent     = 4
+--                       , confStyleAlign      = AlignOn 2
+--                       , confStyleBraceStyle = SameLineBrace
+--                       , confStyleBoolStyle  = TrueFalse
+--                       , confStyleForceDec   = False
+--                       , confStyleShowInts   = True
+--                         -- sort by "type" of key, then sort alphabetically
+--                       , confStyleSortBy     = comparing snd <> comparing fst
+--                       , confStyleGroupSep   = 0
+--                       , confStyleValueSep   = 0
+--                       , confStyleTopSep     = 1
+--                       }
+-- @
+--
+-- It's recommended that you create 'ConfStyle's by modifying this value
+-- using record syntax rather than create your own from scratch:
+--
+-- @
+-- myStyle = confStyle { confStyleBraceStyle = NewLineBrace
+--                     , confStyleBoolStyle  = OnOff
+--                     }
+-- @
+--
 confStyle :: ConfStyle
 confStyle = ConfStyle { confStyleIndent     = 4
                       , confStyleAlign      = AlignOn 2
                       , confStyleBraceStyle = SameLineBrace
                       , confStyleBoolStyle  = TrueFalse
-                      , confStyleNumStyle   = NumStyle False True
+                      , confStyleForceDec   = False
+                      , confStyleShowInts   = True
                       , confStyleSortBy     = comparing snd <> comparing fst
                       , confStyleGroupSep   = 0
                       , confStyleValueSep   = 0
@@ -313,6 +316,8 @@ toHashMapTree sep = go
 hmtToDoc :: ConfStyle -> HashMapTree Text Value -> P.Doc
 hmtToDoc ConfStyle{..} = go True
   where
+    v2d :: Value -> Doc
+    v2d = valueToDoc confStyleBoolStyle confStyleForceDec confStyleShowInts
     toKeyType :: Either a b -> KeyType
     toKeyType (Left  _) = KeyValue
     toKeyType (Right _) = KeyGroup
@@ -334,7 +339,7 @@ hmtToDoc ConfStyle{..} = go True
             maxKeyLength = maximum $ fmap (T.length . fst) l
             keyToDoc k v = P.hsep [ nameToDoc k
                                   , P.equals
-                                  , valueToDoc confStyleBoolStyle confStyleNumStyle v
+                                  , v2d v
                                   ]
             nameToDoc = case confStyleAlign of
                           NoAlign   -> P.text . T.unpack
@@ -353,15 +358,15 @@ hmtToDoc ConfStyle{..} = go True
                          $+$ P.nest confStyleIndent (go False g)
                          $+$ P.rbrace
 
-valueToDoc :: BoolStyle -> NumStyle -> Value -> Doc
-valueToDoc bs NumStyle{..} = go
+valueToDoc :: BoolStyle -> Bool -> Bool -> Value -> Doc
+valueToDoc bs forceDec showInts = go
   where
     go (Bool b)   = withBoolStyle bs b
     go (String t) = P.text $ show t
     go (Number n)
-      | numStyleShowIntegers && denominator n == 1
+      | showInts && denominator n == 1
           = P.integer $ round n
-      | numStyleForceDecimals
+      | forceDec
           = P.text . ($"") . showFFloatAlt Nothing $ (fromRational n :: Double)
       | otherwise
           = P.double $ fromRational n
