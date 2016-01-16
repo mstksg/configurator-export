@@ -60,31 +60,29 @@
 module Data.Configurator.Export (
   -- * Default styles
   -- ** Pretty printing / Exporting
-    renderConf
-  , displayConf
-  , renderHashMap
-  -- *** Write to file
-  , writeConf
+    renderConf          -- :: Config -> IO String
+  , displayConf         -- :: Config -> IO ()
+  , writeConf           -- :: FilePath -> Config -> IO ()
+  , renderHashMap       -- :: HashMap Name Value -> String
   -- ** Doc
-  , confDoc
-  , hashMapDoc
+  , confDoc             -- :: Config -> IO Doc
+  , hashMapDoc          -- :: HashMap Name Value -> Doc
   -- * With styles
   -- ** Describing styles
-  , confStyle
+  , confStyle           -- :: ConfStyle
   , ConfStyle(..)
   , AlignStyle(..)
   , BraceStyle(..)
   , BoolStyle(..)
   , KeyType(..)
   -- ** Pretty printing
-  , renderConf'
-  , displayConf'
-  , renderHashMap'
-  -- *** Write to file
-  , writeConf'
+  , renderConf'         -- :: ConfStyle -> Config -> IO String
+  , displayConf'        -- :: ConfStyle -> Config -> IO ()
+  , writeConf'          -- :: ConfStyle -> FilePath -> Config -> IO ()
+  , renderHashMap'      -- :: ConfStyle -> HashMap Name Value -> String
   -- ** Doc
-  , confDoc'
-  , hashMapDoc'
+  , confDoc'            -- :: ConfStyle -> Config -> IO Doc
+  , hashMapDoc'         -- :: ConfSTyle -> HashMap Name Value -> Doc
   ) where
 
 import Control.Monad
