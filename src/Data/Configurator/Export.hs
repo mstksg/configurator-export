@@ -75,7 +75,7 @@ module Data.Configurator.Export (
   , BraceStyle(..)
   , BoolStyle(..)
   , KeyType(..)
-  -- ** Pretty printing
+  -- ** Pretty printing / Exporting
   , renderConf'         -- :: ConfStyle -> Config -> IO String
   , displayConf'        -- :: ConfStyle -> Config -> IO ()
   , writeConf'          -- :: ConfStyle -> FilePath -> Config -> IO ()
