@@ -38,17 +38,20 @@
 --
 -- > foo {
 -- >     bar {
--- >         baz1 = true
--- >         baz2 = [1, 0.6, "hello", true]
+-- >         baz1  = true
+-- >         baz2  = [1, 0.6, "hello", true]
 -- >     }
--- >     aardvark = "banana"
+-- >     aardvark  = "banana"
+-- >     monkey    = [true, false, 1.9e-3]
+-- >     zebra     = 24
 -- > }
--- >
+-- > 
 -- > foo2 {
--- >     bar = 8.0e-8
+-- >     bar = 8.1e-8
 -- > }
--- >
--- > apple = ["cake", true]
+-- > 
+-- > apple   = ["cake", true]
+-- > orange  = 8943
 --
 -- Further configuration on sorting of keys, displaying of bools and
 -- floats, etc. is possible by passing in custom 'ConfStyle' values.
