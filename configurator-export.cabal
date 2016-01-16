@@ -2,7 +2,26 @@ name:                configurator-export
 version:             0.1.0.0
 synopsis:            Pretty printer and exporter for configurations from
                      the "configurator" library.
-description:         Please see README.md
+description:         Pretty printers and exporters for 'Config's from the
+                     /configurator/ library, in "Data.Configurator".
+                     .
+                     All results are intended to be valid parsing files in the
+                     configuration file syntax of the library.
+                     .
+                     For a full round trip:
+                     .
+                     > main = do
+                     >   cfg <- load [Required "config.cfg"]
+                     >   writeConf "config.cfg" cfg
+                     .
+                     This should load the config file, parse it, and then
+                     re-export it, rewriting the original config file.  The
+                     result should be an identical configuration file (with
+                     keys potentially re-arranged and re-sorted, comments
+                     removed, etc.)
+                     .
+                     See the "Data.Configurator.Export" module for more
+                     details and ways to modify the output style.
 homepage:            http://github.com/mstksg/configurator-export#readme
 license:             BSD3
 license-file:        LICENSE
@@ -11,7 +30,7 @@ maintainer:          justin@jle.im
 copyright:           (c) Justin Le 2015
 category:            Configuration, Data
 build-type:          Simple
--- extra-source-files:
+extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
