@@ -45,11 +45,11 @@
 -- >     monkey    = [true, false, 1.9e-3]
 -- >     zebra     = 24
 -- > }
--- > 
+-- >
 -- > foo2 {
 -- >     bar = 8.1e-8
 -- > }
--- > 
+-- >
 -- > apple   = ["cake", true]
 -- > orange  = 8943
 --
