@@ -132,7 +132,7 @@ data AlignStyle = NoAlign
                   -- ^ Align them to the longest key.
                 | AlignOn Int
                   -- ^ Align to the longest key, but make sure the
-                  -- identation is a multiple of this number. okay.
+                  -- identation is a multiple of this number.
   deriving (Show, Eq, Ord, Read)
 
 -- | Placement style of opening braces (curly brackets) for groups.
@@ -148,7 +148,7 @@ data BraceStyle = SameLineBrace
 -- to what you want.  See 'confStyle' for more details.
 data ConfStyle
     = ConfStyle { confStyleIndent     :: Int
-                  -- ^ Number of columns to indent each tested group.
+                  -- ^ Number of columns to indent each nested group.
                 , confStyleAlign      :: AlignStyle
                   -- ^ Style of aligning the equals signs for keys with
                   -- values.
@@ -180,15 +180,15 @@ data ConfStyle
 -- | Sensible defaults for a 'ConfStyle':
 --
 -- @
--- confStyle :: ConfStyle
--- confStyle = ConfStyle { confStyleIndent     = 4
---                       , confStyleAlign      = AlignOn 2
---                       , confStyleBraceStyle = SameLineBrace
---                       , confStyleBoolStyle  = TrueFalse
+-- confStyle :: 'ConfStyle'
+-- confStyle = 'ConfStyle' { confStyleIndent     = 4
+--                       , confStyleAlign      = 'AlignOn' 2
+--                       , confStyleBraceStyle = 'SameLineBrace'
+--                       , confStyleBoolStyle  = 'TrueFalse'
 --                       , confStyleForceDec   = False
 --                       , confStyleShowInts   = True
 --                         -- sort by "type" of key, then sort alphabetically
---                       , confStyleSortBy     = comparing snd <> comparing fst
+--                       , confStyleSortBy     = 'comparing' snd '<>' comparing fst
 --                       , confStyleGroupSep   = 0
 --                       , confStyleValueSep   = 0
 --                       , confStyleTopSep     = 1
@@ -199,8 +199,8 @@ data ConfStyle
 -- using record syntax rather than create your own from scratch:
 --
 -- @
--- myStyle = confStyle { confStyleBraceStyle = NewLineBrace
---                     , confStyleBoolStyle  = OnOff
+-- myStyle = 'confStyle' { confStyleBraceStyle = 'NewLineBrace'
+--                     , confStyleBoolStyle  = 'OnOff'
 --                     }
 -- @
 --
