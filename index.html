@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>configurator-export-0.1.0.0: Pretty printer and exporter for configurations from
+the &quot;configurator&quot; library.</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">configurator-export-0.1.0.0: Pretty printer and exporter for configurations from
+the &quot;configurator&quot; library.</p></div><div id="content"><div id="description"><h1>configurator-export-0.1.0.0: Pretty printer and exporter for configurations from
+the &quot;configurator&quot; library.</h1><div class="doc"><p>Pretty printers and exporters for <code>Config</code>s from the
+<a href="http://hackage.haskell.org/package/configurator-0.3.0.0">configurator</a>
+library, in <a href="../configurator-0.3.0.0/Data-Configurator.html">Data.Configurator</a>.</p><p>All results are intended to be valid parsing files in the
+configuration file syntax of the library.</p><p>For a full round trip:</p><pre>main = do
+  cfg &lt;- load [Required &quot;config.cfg&quot;]
+  writeConf &quot;config.cfg&quot; cfg</pre><p>This should load the config file, parse it, and then
+re-export it, rewriting the original config file.  The
+result should be an identical configuration file (with
+keys potentially re-arranged and re-sorted, comments
+removed, etc.)</p><p>See the <a href="Data-Configurator-Export.html">Data.Configurator.Export</a> module for more
+details and ways to modify the output style.</p></div></div><div id="module-list"><p class="caption">Modules</p><ul><li><span id="control.n.1" class="module collapser" onclick="toggleSection('n.1')">Data</span><ul id="section.n.1" class="show"><li><span id="control.n.1.1" class="module collapser" onclick="toggleSection('n.1.1')">Configurator</span><ul id="section.n.1.1" class="show"><li><span class="module"><a href="Data-Configurator-Export.html">Data.Configurator.Export</a></span> Pretty printers and exporters for configurator <code>Config</code>s.</li></ul></li></ul></li></ul></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.16.1</p></div></body></html>
