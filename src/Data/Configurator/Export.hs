@@ -93,7 +93,7 @@ import Data.Configurator.Types
 import Data.Foldable
 import Data.Function
 import Data.HashMap.Strict           (HashMap)
-import Data.List
+import Data.List                     (sortBy)
 import Data.List.NonEmpty            (NonEmpty(..))
 import Data.Monoid
 import Data.Ord
