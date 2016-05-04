@@ -100,6 +100,7 @@ import Data.Ord
 import Data.Ratio
 import Data.Text                     (Text)
 import Numeric
+import Prelude hiding                (maximum)
 import Text.PrettyPrint              (Doc, (<+>), ($+$), ($$))
 import qualified Data.HashMap.Strict as HM
 import qualified Data.List.NonEmpty  as NE
