@@ -38,7 +38,8 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Data.Configurator.Export
-  build-depends:       base >= 4.8 && < 5
+  build-depends:       base >= 4.7 && < 5
+                     , bifunctors
                      , configurator
                      , pretty
                      , semigroups >= 0.17
