@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude   #-}
 {-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE RecordWildCards     #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module      : Data.Configurator.Export
@@ -85,26 +86,28 @@ module Data.Configurator.Export (
   , hashMapDoc'         -- :: ConfSTyle -> HashMap Name Value -> Doc
   ) where
 
-import Control.Monad
-import Data.Bifunctor
-import Data.Bool
-import Data.Configurator
-import Data.Configurator.Types
-import Data.Foldable
-import Data.Function
-import Data.HashMap.Strict           (HashMap)
-import Data.List
-import Data.List.NonEmpty            (NonEmpty(..))
-import Data.Monoid
-import Data.Ord
-import Data.Ratio
-import Data.Text                     (Text)
-import Numeric
-import Text.PrettyPrint              (Doc, (<+>), ($+$), ($$))
-import qualified Data.HashMap.Strict as HM
-import qualified Data.List.NonEmpty  as NE
-import qualified Data.Text           as T
-import qualified Text.PrettyPrint    as P
+import           Control.Monad
+import           Data.Bifunctor
+import           Data.Bool.Compat
+import           Data.Configurator
+import           Data.Configurator.Types
+import           Data.Foldable           (toList)
+import           Data.Function
+import           Data.HashMap.Strict     (HashMap)
+import           Data.List               (sortBy)
+import           Data.List.NonEmpty      (NonEmpty(..))
+import           Data.Monoid
+import           Data.Ord
+import           Data.Ratio
+import           Data.Text               (Text)
+import           Numeric.Compat
+import           Prelude                 ()
+import           Prelude.Compat
+import           Text.PrettyPrint        (Doc, (<+>), ($+$), ($$))
+import qualified Data.HashMap.Strict     as HM
+import qualified Data.List.NonEmpty      as NE
+import qualified Data.Text               as T
+import qualified Text.PrettyPrint        as P
 
 data HashMapTree k v = HMT { getHashMapTree :: HashMap k (Either v (HashMapTree k v))
                            }

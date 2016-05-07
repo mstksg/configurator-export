@@ -59,12 +59,8 @@ matrix:
     compiler: ": #stack default"
     addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
 
-  - env: BUILD=stack ARGS="--resolver lts-2"
-    compiler: ": #stack 7.8.4"
-    addons: {apt: {packages: [ghc-7.8.4], sources: [hvr-ghc]}}
-
-  - env: BUILD=stack ARGS="--resolver lts-3"
-    compiler: ": #stack 7.10.2"
+  - env: BUILD=stack ARGS="--resolver lts-4"
+    compiler: ": #stack 7.10.3"
     addons: {apt: {packages: [ghc-7.10.2], sources: [hvr-ghc]}}
 
   - env: BUILD=stack ARGS="--resolver lts-5"
@@ -81,12 +77,8 @@ matrix:
     compiler: ": #stack default osx"
     os: osx
 
-  - env: BUILD=stack ARGS="--resolver lts-2"
-    compiler: ": #stack 7.8.4 osx"
-    os: osx
-
-  - env: BUILD=stack ARGS="--resolver lts-3"
-    compiler: ": #stack 7.10.2 osx"
+  - env: BUILD=stack ARGS="--resolver lts-4"
+    compiler: ": #stack 7.10.3 osx"
     os: osx
 
   - env: BUILD=stack ARGS="--resolver lts-5"
@@ -98,10 +90,6 @@ matrix:
     os: osx
 
   allow_failures:
-  - env: BUILD=stack ARGS="--resolver lts-2"
-  - env: BUILD=stack ARGS="--resolver lts-3"
-  - env: BUILD=cabal GHCVER=7.6.3 CABALVER=1.16 HAPPYVER=1.19.5 ALEXVER=3.1.7
-  - env: BUILD=cabal GHCVER=7.8.4 CABALVER=1.18 HAPPYVER=1.19.5 ALEXVER=3.1.7
   - env: BUILD=cabal GHCVER=head  CABALVER=head HAPPYVER=1.19.5 ALEXVER=3.1.7
   - env: BUILD=stack ARGS="--resolver nightly"
 
