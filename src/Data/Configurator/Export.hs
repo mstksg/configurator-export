@@ -88,7 +88,7 @@ module Data.Configurator.Export (
 
 import           Control.Monad
 import           Data.Bifunctor
-import           Data.Bool
+import           Data.Bool.Compat
 import           Data.Configurator
 import           Data.Configurator.Types
 import           Data.Foldable           (toList)
