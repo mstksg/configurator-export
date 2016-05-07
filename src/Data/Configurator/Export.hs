@@ -1,7 +1,7 @@
-{-# LANGUAGE CPP                 #-}
+{-# LANGUAGE NoImplicitPrelude   #-}
 {-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE RecordWildCards     #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module      : Data.Configurator.Export
@@ -91,6 +91,7 @@ import           Data.Bifunctor
 import           Data.Bool
 import           Data.Configurator
 import           Data.Configurator.Types
+import           Data.Foldable           (toList)
 import           Data.Function
 import           Data.HashMap.Strict     (HashMap)
 import           Data.List               (sortBy)
@@ -99,20 +100,14 @@ import           Data.Monoid
 import           Data.Ord
 import           Data.Ratio
 import           Data.Text               (Text)
-import           Numeric
+import           Numeric.Compat
+import           Prelude                 ()
+import           Prelude.Compat
 import           Text.PrettyPrint        (Doc, (<+>), ($+$), ($$))
 import qualified Data.HashMap.Strict     as HM
 import qualified Data.List.NonEmpty      as NE
 import qualified Data.Text               as T
 import qualified Text.PrettyPrint        as P
-
-#if __GLASGOW_HASKELL__ < 710
-import           Data.Foldable           (toList, maximum)
-import           Data.Functor            ((<$>))
-import           Prelude hiding          (maximum)
-#else
-import           Data.Foldable           (toList)
-#endif
 
 data HashMapTree k v = HMT { getHashMapTree :: HashMap k (Either v (HashMapTree k v))
                            }

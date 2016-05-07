@@ -40,6 +40,7 @@ library
   exposed-modules:     Data.Configurator.Export
   if impl(ghc >= 7.10)
     build-depends:       base >= 4.8 && < 5
+                       , base-compat
                        , configurator
                        , pretty
                        , semigroups >= 0.17
@@ -48,6 +49,7 @@ library
   else
     build-depends:       base >= 4.6 && < 5
                        , bifunctors
+                       , base-compat
                        , configurator
                        , pretty
                        , semigroups >= 0.17
