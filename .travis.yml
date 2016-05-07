@@ -60,7 +60,7 @@ matrix:
     addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
 
   - env: BUILD=stack ARGS="--resolver lts-4"
-    compiler: ": #stack 7.10.2"
+    compiler: ": #stack 7.10.3"
     addons: {apt: {packages: [ghc-7.10.2], sources: [hvr-ghc]}}
 
   - env: BUILD=stack ARGS="--resolver lts-5"
@@ -78,7 +78,7 @@ matrix:
     os: osx
 
   - env: BUILD=stack ARGS="--resolver lts-4"
-    compiler: ": #stack 7.10.2 osx"
+    compiler: ": #stack 7.10.3 osx"
     os: osx
 
   - env: BUILD=stack ARGS="--resolver lts-5"
