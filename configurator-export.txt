@@ -26,6 +26,9 @@
 --   
 --   See the <a>Data.Configurator.Export</a> module for more details and
 --   ways to modify the output style.
+--   
+--   Documentation maintained at
+--   <a>https://mstksg.github.io/configurator-export</a>
 @package configurator-export
 @version 0.1.0.1
 
