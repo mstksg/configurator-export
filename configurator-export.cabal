@@ -1,5 +1,5 @@
 name:                configurator-export
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Pretty printer and exporter for configurations from
                      the "configurator" library.
 description:         Pretty printers and exporters for 'Config's from the
@@ -33,6 +33,7 @@ category:            Configuration, Data
 build-type:          Simple
 extra-source-files:  README.md
                      CHANGELOG.md
+                     stack.yaml
 cabal-version:       >=1.10
 
 library
