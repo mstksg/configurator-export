@@ -23,6 +23,8 @@ description:         Pretty printers and exporters for 'Config's from the
                      .
                      See the "Data.Configurator.Export" module for more
                      details and ways to modify the output style.
+                     .
+                     Documentation maintained at <https://mstksg.github.io/configurator-export>
 homepage:            http://github.com/mstksg/configurator-export
 license:             BSD3
 license-file:        LICENSE

@@ -53,4 +53,8 @@ orange  = 8943
 Further configuration on sorting of keys, displaying of bools and floats, etc.
 is possible by passing in custom `ConfStyle` style option values.
 
+Documentation maintained at <https://mstksg.github.io/configurator-export/>
 
+### Copyright
+
+Copyright (c) Justin Le 2016
