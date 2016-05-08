@@ -27,7 +27,7 @@
 --   See the <a>Data.Configurator.Export</a> module for more details and
 --   ways to modify the output style.
 @package configurator-export
-@version 0.1.0.0
+@version 0.1.0.1
 
 
 -- | Pretty printers and exporters for <a>Config</a>s from the
