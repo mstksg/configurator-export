@@ -1,11 +1,11 @@
 configurator-export
 ===================
 
-[![configurator-export on Stackage LTS 4](http://stackage.org/package/configurator-export/badge/lts-4)](http://stackage.org/lts-4/package/configurator-export)
+[![configurator-export on Hackage](https://img.shields.io/hackage/v/configurator-export.svg?maxAge=2592000)](https://hackage.haskell.org/package/configurator-export)
 [![configurator-export on Stackage LTS](http://stackage.org/package/configurator-export/badge/lts)](http://stackage.org/lts/package/configurator-export)
 [![configurator-export on Stackage Nightly](http://stackage.org/package/configurator-export/badge/nightly)](http://stackage.org/nightly/package/configurator-export)
-
 [![Build Status](https://travis-ci.org/mstksg/configurator-export.svg?branch=master)](https://travis-ci.org/mstksg/configurator-export)
+
 
 Pretty printers and exporters for 'Config's from the great
 *[configurator](http://hackage.haskell.org/package/configurator)* library.
