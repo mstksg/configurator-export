@@ -88,26 +88,25 @@ module Data.Configurator.Export (
 
 import           Control.Monad
 import           Data.Bifunctor
-import           Data.Bool.Compat
+import           Data.Bool.Compat         (bool)
 import           Data.Configurator
 import           Data.Configurator.Types
-import           Data.Foldable           (toList)
+import           Data.Foldable            (toList)
 import           Data.Function
-import           Data.HashMap.Strict     (HashMap)
-import           Data.List               (sortBy)
-import           Data.List.NonEmpty      (NonEmpty(..))
+import           Data.HashMap.Strict      (HashMap)
+import           Data.List                (sortBy)
+import           Data.List.NonEmpty       (NonEmpty(..))
 import           Data.Monoid
 import           Data.Ord
 import           Data.Ratio
-import           Data.Text               (Text)
-import           Numeric.Compat
-import           Prelude                 ()
-import           Prelude.Compat
-import           Text.PrettyPrint        (Doc, (<+>), ($+$), ($$))
-import qualified Data.HashMap.Strict     as HM
-import qualified Data.List.NonEmpty      as NE
-import qualified Data.Text               as T
-import qualified Text.PrettyPrint        as P
+import           Data.Text                (Text)
+import           Numeric.Compat           (showFFloatAlt)
+import           Prelude
+import           Text.PrettyPrint         (Doc, (<+>), ($+$), ($$))
+import qualified Data.HashMap.Strict      as HM
+import qualified Data.List.NonEmpty       as NE
+import qualified Data.Text                as T
+import qualified Text.PrettyPrint         as P
 
 data HashMapTree k v = HMT { getHashMapTree :: HashMap k (Either v (HashMapTree k v))
                            }
